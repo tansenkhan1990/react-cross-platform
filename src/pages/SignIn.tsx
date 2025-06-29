@@ -1,28 +1,16 @@
 import React from "react";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { useAuthForm, signInSchema } from "../hooks/useAuthForm";
 
-// Zod schema for validation
-const schema = z.object({
-  email: z.string().email("Invalid email address"),
-  password: z.string().min(1, "Password is required"),
-});
-
-type SignInForm = z.infer<typeof schema>;
-
+// ✅ Let the hook infer the type from the schema
 const SignIn = () => {
   const {
     register,
     handleSubmit,
     setError,
     formState: { errors },
-  } = useForm<SignInForm>({
-    resolver: zodResolver(schema),
-  });
+  } = useAuthForm(signInSchema);
 
-  const onSubmit = (data: SignInForm) => {
-    // Simulate incorrect password
+  const onSubmit = (data: typeof signInSchema._type) => {
     if (data.password !== "password") {
       setError("password", {
         type: "manual",
