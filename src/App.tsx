@@ -17,15 +17,22 @@ import Dashboard from "./pages/Dashboard";
 import Logout from "./pages/Logout";
 import PrivateRoute from "./routes/PrivateRoute";
 
+// ✅ Define private route config
+const privateRoutes = [
+  { path: "/profile", element: <Profile /> },
+  { path: "/dashboard", element: <Dashboard /> },
+  { path: "/logout", element: <Logout /> },
+];
+
 const AppLayout = () => {
   const isAuthenticated = useSelector(
     (state: RootState) => state.auth.isAuthenticated
   );
   const location = useLocation();
 
-  // Define which routes are private
-  const isPrivateRoute = ["/profile", "/dashboard", "/logout"].includes(
-    location.pathname
+  // Check if current route is private
+  const isPrivateRoute = privateRoutes.some(
+    (route) => route.path === location.pathname
   );
 
   return (
@@ -39,30 +46,13 @@ const AppLayout = () => {
           <Route path="/signup" element={<SignUp />} />
 
           {/* Private Routes */}
-          <Route
-            path="/profile"
-            element={
-              <PrivateRoute>
-                <Profile />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/dashboard"
-            element={
-              <PrivateRoute>
-                <Dashboard />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/logout"
-            element={
-              <PrivateRoute>
-                <Logout />
-              </PrivateRoute>
-            }
-          />
+          {privateRoutes.map(({ path, element }) => (
+            <Route
+              key={path}
+              path={path}
+              element={<PrivateRoute>{element}</PrivateRoute>}
+            />
+          ))}
         </Routes>
       </main>
       <Footer />
