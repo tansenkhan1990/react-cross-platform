@@ -6,7 +6,7 @@ const Dashboard = () => {
   const email = useSelector((state: RootState) => state.auth.email);
 
   return (
-    <div className="min-h-screen bg-gray-100 px-6 py-8">
+    <div className="bg-gray-100 px-6 py-8">
       <div className="max-w-7xl mx-auto">
         {/* Page Header */}
         <div className="mb-8">

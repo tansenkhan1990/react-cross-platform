@@ -7,7 +7,7 @@ const Profile = () => {
   const email = useSelector((state: RootState) => state.auth.email);
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4 py-10">
+    <div className="bg-gray-100 flex items-center justify-center px-4 py-10">
       <div className="bg-white shadow-lg rounded-lg p-8 max-w-md w-full">
         {/* Avatar */}
         <div className="flex justify-center mb-6">
