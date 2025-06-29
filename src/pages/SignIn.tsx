@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login } from "../store/slices/authSlice";
 import { useAuthForm, signInSchema } from "../hooks/useAuthForm";
@@ -76,6 +76,14 @@ const SignIn = () => {
             Sign In
           </button>
         </form>
+
+        {/* Sign Up Prompt */}
+        <p className="text-sm text-center text-gray-600 mt-6">
+          Don’t have an account?{" "}
+          <Link to="/signup" className="text-blue-600 hover:underline font-medium">
+            Sign up
+          </Link>
+        </p>
       </div>
     </div>
   );
