@@ -39,37 +39,18 @@ const AppRoutes = () => {
         }
       />
 
-      {/* Private Routes */}
+      {/* Grouped Private Routes */}
       <Route
-        path="/profile"
         element={
           <PrivateRoute>
-            <PrivateLayout>
-              <Profile />
-            </PrivateLayout>
+            <PrivateLayout />
           </PrivateRoute>
         }
-      />
-      <Route
-        path="/dashboard"
-        element={
-          <PrivateRoute>
-            <PrivateLayout>
-              <Dashboard />
-            </PrivateLayout>
-          </PrivateRoute>
-        }
-      />
-      <Route
-        path="/logout"
-        element={
-          <PrivateRoute>
-            <PrivateLayout>
-              <Logout />
-            </PrivateLayout>
-          </PrivateRoute>
-        }
-      />
+      >
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/logout" element={<Logout />} />
+      </Route>
     </Routes>
   );
 };
