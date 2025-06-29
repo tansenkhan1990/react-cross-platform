@@ -20,7 +20,7 @@ const SignIn = () => {
 
     if (email === "tansenkhan1990@gmail.com" && password === "password") {
       dispatch(login(email));
-      navigate("/profile");
+      navigate("/dashboard");
     } else {
       setError("password", {
         type: "manual",
