@@ -1,6 +1,6 @@
 import React from "react";
 
-const Hero = () => {
+const Home = () => {
   return (
     <section className="flex flex-col items-center justify-center px-4 py-16 text-center">
       <h2 className="text-3xl sm:text-4xl font-extrabold mb-4">
@@ -21,4 +21,4 @@ const Hero = () => {
   );
 };
 
-export default Hero;
+export default Home;
