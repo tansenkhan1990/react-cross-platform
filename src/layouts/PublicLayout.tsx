@@ -1,14 +1,14 @@
-// src/layouts/PrivateLayout.tsx
+// src/layouts/PublicLayout.tsx
 import React from "react";
-import PrivateHeader from "../components/PrivateHeader";
+import PublicHeader from "../components/PublicHeader";
 import Footer from "../components/Footer";
 
-const PrivateLayout = ({ children }: { children: React.ReactNode }) => (
+const PublicLayout = ({ children }: { children: React.ReactNode }) => (
   <div className="min-h-screen flex flex-col bg-white text-gray-800">
-    <PrivateHeader />
+    <PublicHeader />
     <main className="flex-grow">{children}</main>
     <Footer />
   </div>
 );
 
-export default PrivateLayout;
+export default PublicLayout;
