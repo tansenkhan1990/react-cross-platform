@@ -102,3 +102,15 @@ Capacitor is trusted by major companies and apps, including:
 🏰 Disney (internal tools)
 
 These companies use Capacitor to deliver fast, native-like experiences while maintaining the agility of web development.
+
+
+application/
+├── android/          # Android native project
+├── ios/              # iOS native project
+├── public/
+├── src/
+│   └── App.tsx       # Main React component
+├── tailwind.config.js
+├── eslint.config.js
+├── package.json
+└── capacitor.config.ts
