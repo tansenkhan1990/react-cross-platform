@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-// Zod schema with validation
 const schema = z
   .object({
     firstName: z.string().min(1, "First name is required"),
@@ -23,13 +22,23 @@ const SignUp = () => {
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors },
   } = useForm<SignUpForm>({
     resolver: zodResolver(schema),
   });
 
   const onSubmit = (data: SignUpForm) => {
-    console.log("Sign Up Data:", data);
+    // Simulate existing user
+    if (data.email === "tansenkhan1990@gmail.com") {
+      setError("email", {
+        type: "manual",
+        message: "User already exists",
+      });
+      return;
+    }
+
+    console.log("Sign Up Success:", data);
   };
 
   return (

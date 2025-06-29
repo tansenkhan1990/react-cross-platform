@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-// Zod schema for validation
 const schema = z.object({
   email: z.string().email("Invalid email address"),
   password: z.string().min(1, "Password is required"),
@@ -15,13 +14,23 @@ const SignIn = () => {
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors },
   } = useForm<SignInForm>({
     resolver: zodResolver(schema),
   });
 
   const onSubmit = (data: SignInForm) => {
-    console.log("Sign In Data:", data);
+    // Simulate incorrect password
+    if (data.password !== "password") {
+      setError("password", {
+        type: "manual",
+        message: "Incorrect password",
+      });
+      return;
+    }
+
+    console.log("Sign In Success:", data);
   };
 
   return (
