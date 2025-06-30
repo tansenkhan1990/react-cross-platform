@@ -1,5 +1,9 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { login } from "../store/slices/authSlice";
 import { useAuthForm, signUpSchema } from "../hooks/useAuthForm";
+import { signUp } from "../api/authApi";
 
 const SignUp = () => {
   const {
@@ -9,16 +13,20 @@ const SignUp = () => {
     formState: { errors },
   } = useAuthForm(signUpSchema);
 
-  const onSubmit = (data: typeof signUpSchema._type) => {
-    if (data.email === "tansenkhan1990@gmail.com") {
-      setError("email", {
-        type: "manual",
-        message: "User already exists",
-      });
-      return;
-    }
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-    console.log("Sign Up Success:", data);
+  const onSubmit = async (data: typeof signUpSchema._type) => {
+    try {
+      const { confirmPassword, ...formData } = data;
+      const { user, accessToken } = await signUp(formData);
+      dispatch(login({ user, accessToken }));
+      navigate("/dashboard");
+    } catch (err: any) {
+      const message =
+        err.response?.data?.message || "Something went wrong. Please try again.";
+      setError("email", { type: "manual", message });
+    }
   };
 
   return (

@@ -1,16 +1,7 @@
-import React from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { RootState } from "../store";
+
 
 const PrivateHeader = () => {
-  const user = useSelector((state: RootState) => state.auth.user);
-
-  const displayName = user?.firstName
-    ? user.firstName
-    : user?.email
-    ? user.email
-    : "Guest";
 
   return (
     <header className="bg-gray-900 text-white shadow">
