@@ -13,10 +13,13 @@ interface AuthState {
   isAuthenticated: boolean;
 }
 
+const storedUser = localStorage.getItem("user");
+const storedToken = localStorage.getItem("accessToken");
+
 const initialState: AuthState = {
-  user: null,
-  accessToken: null,
-  isAuthenticated: false,
+  user: storedUser ? JSON.parse(storedUser) : null,
+  accessToken: storedToken || null,
+  isAuthenticated: !!storedToken,
 };
 
 const authSlice = createSlice({
@@ -27,11 +30,17 @@ const authSlice = createSlice({
       state.user = action.payload.user;
       state.accessToken = action.payload.accessToken;
       state.isAuthenticated = true;
+
+      localStorage.setItem("user", JSON.stringify(action.payload.user));
+      localStorage.setItem("accessToken", action.payload.accessToken);
     },
     logout(state) {
       state.user = null;
       state.accessToken = null;
       state.isAuthenticated = false;
+
+      localStorage.removeItem("user");
+      localStorage.removeItem("accessToken");
     },
   },
 });
