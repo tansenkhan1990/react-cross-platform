@@ -3,6 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login } from "../store/slices/authSlice";
 import { useAuthForm, signInSchema } from "../hooks/useAuthForm";
+import { signIn } from "../api/authApi";
 
 const SignIn = () => {
   const {
@@ -15,17 +16,15 @@ const SignIn = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const onSubmit = (data: typeof signInSchema._type) => {
-    const { email, password } = data;
-
-    if (email === "tansenkhan1990@gmail.com" && password === "password") {
-      dispatch(login(email));
+  const onSubmit = async (data: typeof signInSchema._type) => {
+    try {
+      const { user, accessToken } = await signIn(data.email, data.password);
+      dispatch(login({ user, accessToken }));
       navigate("/dashboard");
-    } else {
-      setError("password", {
-        type: "manual",
-        message: "Incorrect email or password",
-      });
+    } catch (err: any) {
+      const message =
+        err.response?.data?.message || "Something went wrong. Please try again.";
+      setError("password", { type: "manual", message });
     }
   };
 

@@ -4,7 +4,13 @@ import { useSelector } from "react-redux";
 import { RootState } from "../store";
 
 const PrivateHeader = () => {
-  const email = useSelector((state: RootState) => state.auth.email);
+  const user = useSelector((state: RootState) => state.auth.user);
+
+  const displayName = user?.firstName
+    ? user.firstName
+    : user?.email
+    ? user.email
+    : "Guest";
 
   return (
     <header className="bg-gray-900 text-white shadow">
@@ -28,7 +34,6 @@ const PrivateHeader = () => {
             Logout
           </Link>
         </nav>
-
       </div>
     </header>
   );

@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../store";
 
 const Dashboard = () => {
-  const email = useSelector((state: RootState) => state.auth.email);
+  const user = useSelector((state: RootState) => state.auth.user);
 
   return (
     <div className="bg-gray-100 px-6 py-8">
@@ -25,8 +25,8 @@ const Dashboard = () => {
             <p className="mt-2 text-2xl font-semibold text-green-600">1,245</p>
           </div>
           <div className="bg-white rounded-lg shadow p-5">
-            <h2 className="text-sm font-medium text-gray-500">SignIn as</h2>
-            <p className="mt-2  text-blue-600">{email}</p>
+            <h2 className="text-sm font-medium text-gray-500">Signed in as</h2>
+            <p className="mt-2 text-blue-600">{user?.firstName || "Unknown"} {user?.lastName || "User"}</p>
           </div>
           <div className="bg-white rounded-lg shadow p-5">
             <h2 className="text-sm font-medium text-gray-500">New Signups</h2>
