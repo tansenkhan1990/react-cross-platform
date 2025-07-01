@@ -7,6 +7,7 @@ const Home = () => {
         Welcome to <span className="text-blue-600">MyDemoProject</span>
       </h2>
       <p className="text-base sm:text-lg text-gray-600 max-w-2xl mb-8">
+        <h2>This is home </h2>
         Experience the future of hospitality with AI-powered solutions tailored for hotels and
         residences. From smart room booking and personalized guest services to real-time concierge
         support and intelligent pricing optimization — our platform helps you deliver seamless,
