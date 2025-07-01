@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
+// Define the shape of a user
 interface User {
   id: number;
   firstName: string;
@@ -7,21 +8,37 @@ interface User {
   email: string;
 }
 
+// Define the shape of the auth state
 interface AuthState {
   user: User | null;
   accessToken: string | null;
   isAuthenticated: boolean;
 }
 
+// Safely load user from localStorage
+let parsedUser: User | null = null;
 const storedUser = localStorage.getItem("user");
+
+try {
+  if (storedUser && storedUser !== "undefined") {
+    parsedUser = JSON.parse(storedUser);
+  }
+} catch (error) {
+  console.warn("Failed to parse user from localStorage:", error);
+  localStorage.removeItem("user");
+}
+
+// Load access token
 const storedToken = localStorage.getItem("accessToken");
 
+// Initial state
 const initialState: AuthState = {
-  user: storedUser ? JSON.parse(storedUser) : null,
+  user: parsedUser,
   accessToken: storedToken || null,
   isAuthenticated: !!storedToken,
 };
 
+// Create the slice
 const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -45,5 +62,6 @@ const authSlice = createSlice({
   },
 });
 
+// Export actions and reducer
 export const { login, logout } = authSlice.actions;
 export default authSlice.reducer;
