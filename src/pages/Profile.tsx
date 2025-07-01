@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
-import { UserCircleIcon, EnvelopeIcon } from "@heroicons/react/24/solid";
+import { UserCircleIcon, UserIcon } from "@heroicons/react/24/solid";
 
 const Profile = () => {
   const user = useSelector((state: RootState) => state.auth.user);
@@ -25,6 +25,10 @@ const Profile = () => {
         </div>
 
         <div className="space-y-4">
+          <div className="flex items-center gap-3">
+            <UserIcon className="w-5 h-5 text-gray-500" />
+            <span className="text-gray-700 text-sm">User</span>
+          </div>
 
           <div className="flex items-center gap-3">
             <span className="w-5 h-5 rounded-full bg-green-500 inline-block"></span>
