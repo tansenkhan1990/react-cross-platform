@@ -25,10 +25,6 @@ const Profile = () => {
         </div>
 
         <div className="space-y-4">
-          <div className="flex items-center gap-3">
-            <EnvelopeIcon className="w-5 h-5 text-gray-500" />
-            <span className="text-gray-700 text-sm">{user?.email}</span>
-          </div>
 
           <div className="flex items-center gap-3">
             <span className="w-5 h-5 rounded-full bg-green-500 inline-block"></span>

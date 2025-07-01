@@ -26,7 +26,7 @@ const Dashboard = () => {
           </div>
           <div className="bg-white rounded-lg shadow p-5">
             <h2 className="text-sm font-medium text-gray-500">Signed in as</h2>
-            <p className="mt-2 text-blue-600">{user?.firstName || "Unknown"} {user?.lastName || "User"}</p>
+            <p className="mt-2 text-blue-600"> {user?.lastName || "User"}</p>
           </div>
           <div className="bg-white rounded-lg shadow p-5">
             <h2 className="text-sm font-medium text-gray-500">New Signups</h2>
