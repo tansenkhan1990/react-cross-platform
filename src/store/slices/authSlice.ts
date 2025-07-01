@@ -15,30 +15,15 @@ interface AuthState {
   isAuthenticated: boolean;
 }
 
-// Safely load user from localStorage
-let parsedUser: User | null = null;
-const storedUser = localStorage.getItem("user");
-
-try {
-  if (storedUser && storedUser !== "undefined") {
-    parsedUser = JSON.parse(storedUser);
-  }
-} catch (error) {
-  console.warn("Failed to parse user from localStorage:", error);
-  localStorage.removeItem("user");
-}
-
-// Load access token
+// Load access token from localStorage
 const storedToken = localStorage.getItem("accessToken");
 
-// Initial state
 const initialState: AuthState = {
-  user: parsedUser,
+  user: null, // will be set after login
   accessToken: storedToken || null,
   isAuthenticated: !!storedToken,
 };
 
-// Create the slice
 const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -48,7 +33,6 @@ const authSlice = createSlice({
       state.accessToken = action.payload.accessToken;
       state.isAuthenticated = true;
 
-      localStorage.setItem("user", JSON.stringify(action.payload.user));
       localStorage.setItem("accessToken", action.payload.accessToken);
     },
     logout(state) {
@@ -56,12 +40,10 @@ const authSlice = createSlice({
       state.accessToken = null;
       state.isAuthenticated = false;
 
-      localStorage.removeItem("user");
       localStorage.removeItem("accessToken");
     },
   },
 });
 
-// Export actions and reducer
 export const { login, logout } = authSlice.actions;
 export default authSlice.reducer;
